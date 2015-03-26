@@ -2,45 +2,41 @@ package info.ups.fr.puzzlegame_template;
 
 import android.graphics.Point;
 import android.util.Log;
+import android.view.View;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by leocances on 25/03/15.
+ * @author  leocances
  */
 public class Grid {
-    private Point[] points;
+    private List<Point> points;
     private int caseWidth, caseHeight;
 
     public Grid() {
-        this.points = new Point[10];
+        this.points = new ArrayList<Point>();
     }
 
     public Grid(int nbPiece, int width, int height) {
-        final int columnWidth   = width / nbPiece;
-        final int rowHeight     = height / nbPiece;
+        this.caseHeight         = width / (nbPiece + 2);
+        this.caseWidth          = height / (nbPiece + 2);
         final int edgeNbCase    = (int) Math.sqrt(nbPiece + 2);
-        this.points = new Point[nbPiece+2];
-        this.caseHeight = rowHeight;
-        this.caseWidth = columnWidth;
+        this.points = new ArrayList<Point>(nbPiece + 2);
 
-        int compteur = 0;
         for (int r = 0; r < edgeNbCase; ++r) {
             for (int c = 0; c < edgeNbCase; ++c) {
-                points[compteur] = new Point(r*rowHeight, c*columnWidth);
-                compteur += 1;
+                points.add(new Point(r * caseHeight, c * caseWidth));
             }
         }
     }
 
     public Point closestPoint(Point point) {
-        int posX, posY;
+
 
         for (Point p : points) {
-            posX = p.x;
-            posY = p.y;
-
-            if (posX < point.x && point.x < posX + caseWidth) {
-                if (posY < point.y && point.y < posY + caseHeight) {
-                    Log.v("TEST", p.toString());
+            if (p.x < point.x && point.x < p.x + caseWidth) {
+                if (p.y < point.y && point.y < p.y + caseHeight) {
                     return p;
                 }
             }
@@ -53,5 +49,10 @@ public class Grid {
         return closestPoint(new Point(x, y));
     }
 
-    public Point[] getPoints() {return this.points;}
+    public void setCaseDim(int width, int height) {
+        this.caseWidth = width;
+        this.caseHeight = height;
+    }
+
+    public List<Point> getPoints() {return this.points;}
 }
