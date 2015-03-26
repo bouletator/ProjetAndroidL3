@@ -1,6 +1,7 @@
 package info.ups.fr.puzzlegame_template;
 
 import android.graphics.Point;
+import android.util.Log;
 
 /**
  * Created by leocances on 25/03/15.
@@ -16,15 +17,16 @@ public class Grid {
     public Grid(int nbPiece, int width, int height) {
         final int columnWidth   = width / nbPiece;
         final int rowHeight     = height / nbPiece;
-        final int edgeNbCase    = (int) Math.sqrt(nbPiece);
-        this.points = new Point[nbPiece];
-        this.caseHeight = height;
-        this.caseWidth = width;
+        final int edgeNbCase    = (int) Math.sqrt(nbPiece + 2);
+        this.points = new Point[nbPiece+2];
+        this.caseHeight = rowHeight;
+        this.caseWidth = columnWidth;
 
         int compteur = 0;
         for (int r = 0; r < edgeNbCase; ++r) {
             for (int c = 0; c < edgeNbCase; ++c) {
-                points[compteur++] = new Point(r+rowHeight, c*columnWidth);
+                points[compteur] = new Point(r*rowHeight, c*columnWidth);
+                compteur += 1;
             }
         }
     }
@@ -36,8 +38,9 @@ public class Grid {
             posX = p.x;
             posY = p.y;
 
-            if (posX < point.x && point.x < posX + this.caseWidth) {
-                if (posY < point.y && point.y < posY + this.caseHeight) {
+            if (posX < point.x && point.x < posX + caseWidth) {
+                if (posY < point.y && point.y < posY + caseHeight) {
+                    Log.v("TEST", p.toString());
                     return p;
                 }
             }
