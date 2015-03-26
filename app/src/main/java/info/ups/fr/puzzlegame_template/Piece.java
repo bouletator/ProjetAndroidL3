@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -37,6 +38,10 @@ public class Piece extends Drawable{
 
         if (posY < 0)           posY = 0;
         else if (posY > 300)    posY = 300;
+    }
+
+    public void setCoord(Point p) {
+        setCoord(p.x, p.y);
     }
 
     public void setImage(Bitmap image) {this.image = image;}
