@@ -26,23 +26,29 @@ public class Grid {
 
         for (int r = 0; r < edgeNbCase; ++r) {
             for (int c = 0; c < edgeNbCase; ++c) {
+                Log.v("TEST", "x = " + r*caseHeight + ". y = " + c*caseWidth);
                 points.add(new Point(r * caseHeight, c * caseWidth));
             }
         }
     }
 
     public Point closestPoint(Point point) {
+        Point out   = new Point(0, 0);
+        double dist, mini; int dx, dy;
 
-
+        mini = 10000;
         for (Point p : points) {
-            if (p.x < point.x && point.x < p.x + caseWidth) {
-                if (p.y < point.y && point.y < p.y + caseHeight) {
-                    return p;
-                }
+            dx = point.x - p.x;
+            dy = point.y - p.y;
+
+            dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < mini) {
+                mini = dist;
+                out = p;
             }
         }
 
-        return null;
+        return out;
     }
 
     public Point closestPoint(int x, int y) {
