@@ -90,4 +90,5 @@ public class Grid {
      * @return
      */
     public List<Point> getPoints() {return this.points;}
+    public Point getPoint(int id) {return this.points.get(id);}
 }
