@@ -101,12 +101,16 @@ public class PieceClassTest extends View {
                 if (dragInfo.containsKey("piece")) {
                     // swap
                     Piece toSwap = getClosestPiece(x, y);
-                    if (toSwap != null)
-                        toSwap.setCoord((Point) dragInfo.get("posInit"));
-
-                    // positionnement de la première piece
-                    Point coords = grid.closestPoint(x, y);
                     p = (Piece) dragInfo.get("piece");
+                    Point coords;
+                    if (toSwap != null) {
+                        toSwap.setCoord((Point) dragInfo.get("posInit"));
+                        // positionnement de la première piece
+                        coords = grid.closestPoint(x, y);
+                    } else {
+                        coords = (Point) dragInfo.get("posInit");
+                    }
+
                     p.setCoord(coords);
 
                     // supression des dragInfos

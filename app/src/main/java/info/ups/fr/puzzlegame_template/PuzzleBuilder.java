@@ -20,7 +20,7 @@ public class PuzzleBuilder {
         this.level = lvl;
 
         /* rend l'image carrée */
-        int size = (picture.getHeight()<picture.getWidth())?
+        int size = (picture.getHeight() < picture.getWidth())?
                 picture.getHeight() :
                 picture.getWidth();
         int xPadding = (picture.getWidth()-size)/2;
@@ -32,11 +32,11 @@ public class PuzzleBuilder {
      * @return la taille d'une sous image du puzzle
      */
     public int getSubSize() {
-        return this.fullPicture.getWidth() / this.level*this.level;
+        return this.fullPicture.getWidth() / this.level;
     }
 
     /**
-     * Divise l'image de base en carrés et construit une liste arodonée avec les morceaux créés
+     * Divise l'image de base en carrés et construit une liste ordonée avec les morceaux créés
      */
     private ArrayList<Bitmap> dividePicture() {
         ArrayList<Bitmap> pictures = new ArrayList<Bitmap>();
@@ -63,7 +63,7 @@ public class PuzzleBuilder {
 
     /**
      *
-     * @return Une liste mélangée de sous images
+     * @return Une liste d'Integer mélangés
      */
     private ArrayList<Integer> shuffle() {
         Random r = new Random();
@@ -98,8 +98,14 @@ public class PuzzleBuilder {
         ArrayList<Bitmap> pictures = this.dividePicture();
         ArrayList<Integer> indexes = this.shuffle();
 
+        Grid grid = new Grid(pictures.size(), this.getSubSize(), this.getSubSize());
+
         for (int i=0 ; i<pictures.size() ; ++i) {
             pieces.add(new Piece(i, indexes.get(i), pictures.get(i)));
+        }
+
+        for (Piece p : pieces) {
+            p.setCoord(grid.getPoint(p.getIdG()));
         }
 
         return pieces;
