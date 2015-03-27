@@ -64,8 +64,8 @@ public class PieceClassTest extends View {
         // création du puzzle
         Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.mesange);
         myPuzzle = new PuzzleBuilder(4, img);
-        grid = new Grid(pieces.size(), myPuzzle.getSubSize(), myPuzzle.getSubSize());
         pieces = myPuzzle.getPieces();
+        grid = new Grid(pieces.size(), myPuzzle.getSubSize(), myPuzzle.getSubSize());
     }
 
     @Override
@@ -99,6 +99,7 @@ public class PieceClassTest extends View {
                     p = (Piece) dragInfo.get("piece");
                     Point coords;
                     if (toSwap != null) {
+                        Log.v("Coord: ", "have a swapp piece");
                         toSwap.setCoord((Point) dragInfo.get("posInit"));
                         // positionnement de la première piece
                         coords = grid.closestPoint(x, y);
