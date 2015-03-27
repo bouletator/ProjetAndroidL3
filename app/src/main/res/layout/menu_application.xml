@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/bouton_continue"
-        android:id="@+id/button2"
+        android:id="@+id/continue_game"
         android:layout_gravity="center_horizontal" />
 
     <Space
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/selection_level"
-        android:id="@+id/button3"
+        android:id="@+id/selection_level"
         android:layout_gravity="center_horizontal" />
 
     <Space
@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/reset_button"
-        android:id="@+id/button4"
+        android:id="@+id/reset"
         android:layout_gravity="center_horizontal" />
 
     <Space
@@ -66,6 +66,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/exit_button"
-        android:id="@+id/button5"
+        android:id="@+id/exit"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>

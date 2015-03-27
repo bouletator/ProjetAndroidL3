@@ -16,13 +16,24 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_application);
 
-        final Button loginButton = (Button) findViewById(R.id.start);
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        final Button startButton = (Button) findViewById(R.id.start);
+        startButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        //Exit
+        final Button exitButton = (Button) findViewById(R.id.exit);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
+                System.exit(0);
             }
         });
     }
