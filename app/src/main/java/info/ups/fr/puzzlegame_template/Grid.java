@@ -2,7 +2,6 @@ package info.ups.fr.puzzlegame_template;
 
 import android.graphics.Point;
 import android.util.Log;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
