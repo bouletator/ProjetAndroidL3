@@ -28,22 +28,13 @@ public class PieceClassTest extends View {
 
     public PieceClassTest(Context context) {
         super(context);
-        init();
     }
 
     public PieceClassTest(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
     public PieceClassTest(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init();
-    }
-
-    private void init() {
-        Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.mesange);
-        myPuzzle = new PuzzleBuilder(4, img);
-        pieces = myPuzzle.getPieces();
     }
 
     @Override
@@ -64,13 +55,17 @@ public class PieceClassTest extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
+        // Récupération taille de la vue
         width = getWidth();
         height = getHeight();
         left = getLeft();
         top = getTop();
 
-        Log.v("TEST", "subsize = " + myPuzzle.getSubSize());
+        // création du puzzle
+        Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.mesange);
+        myPuzzle = new PuzzleBuilder(4, img);
         grid = new Grid(pieces.size(), myPuzzle.getSubSize(), myPuzzle.getSubSize());
+        pieces = myPuzzle.getPieces();
     }
 
     @Override
