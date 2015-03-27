@@ -109,8 +109,11 @@ public class PieceClassTest extends View {
                     p = (Piece) dragInfo.get("piece");
                     p.setCoord(coords);
 
+                    // supression des dragInfos
+                    this.dragInfo.clear();
+
                     invalidate();
-                    return true;
+                    return false;
                 }
         }
 
@@ -118,8 +121,12 @@ public class PieceClassTest extends View {
     }
 
     private Piece getClosestPiece(int x, int y) {
+        Piece selected = null;
+        if (dragInfo.containsKey("piece"))
+            selected = (Piece)dragInfo.get("piece");
+
         for (Piece p : pieces) {
-            if (p.contains(x, y)) {
+            if (p.contains(x, y) && ! p.equals(selected)) {
                 return p;
             }
         }
