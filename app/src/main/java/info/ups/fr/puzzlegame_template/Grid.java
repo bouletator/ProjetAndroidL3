@@ -89,6 +89,16 @@ public class Grid {
      * Retourne une liste contenant les points qui forment la grille
      * @return
      */
-    public List<Point> getPoints() {return this.points;}
-    public Point getPoint(int id) {return this.points.get(id);}
+    public List<Point> getPoints() {
+        return this.points;
+    }
+
+    /**
+     * Retourne le point correspondant au numéro de case passé en paramètre
+     * @param id
+     * @return Point
+     */
+    public Point getPoint(int id) {
+        return this.points.get(id);
+    }
 }
