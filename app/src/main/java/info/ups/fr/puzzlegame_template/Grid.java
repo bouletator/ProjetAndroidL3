@@ -101,4 +101,19 @@ public class Grid {
     public Point getPoint(int id) {
         return this.points.get(id);
     }
+
+    /**
+     * Fais correspondre un point à son identifiant sur la grille
+     * @param p
+     * @return id du point si le point appartient à la grille, -1 sinon.
+     */
+    public int getId(Point p) {
+        Point point;
+        for (int i=0 ; i<this.points.size() ; ++i) {
+            point = this.points.get(i);
+            if (point.equals(p))
+                return i;
+        }
+        return -1;
+    }
 }
