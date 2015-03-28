@@ -28,12 +28,18 @@ public class PuzzleBuilder {
         int yPadding = (picture.getHeight()-size)/2;
         this.fullPicture = Bitmap.createBitmap(picture, xPadding, yPadding, size, size);
 
-        /* dimensionnement de l'image */
+        /* redimensionnement de l'image */
         int maxSize = (PieceClassTest.height>PieceClassTest.width)?
-                PieceClassTest.width - PieceClassTest.left*2:
-                PieceClassTest.height - PieceClassTest.top*2;
-        if (this.fullPicture.getHeight() > maxSize)
-            this.fullPicture = Bitmap.createScaledBitmap(this.fullPicture, maxSize, maxSize, true);
+                PieceClassTest.width :
+                PieceClassTest.height;
+
+        if (maxSize>size)
+            maxSize = size;
+
+        while (maxSize%lvl != 0) // on rend l'image divisible en part égales
+            --maxSize;
+
+        this.fullPicture = Bitmap.createScaledBitmap(this.fullPicture, maxSize, maxSize, true);
     }
 
     /**
