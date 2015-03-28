@@ -26,7 +26,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/bouton_continue"
+        android:text="@string/continue_game"
         android:id="@+id/continue_game"
         android:layout_gravity="center_horizontal" />
 

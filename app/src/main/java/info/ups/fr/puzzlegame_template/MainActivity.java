@@ -1,6 +1,8 @@
 package info.ups.fr.puzzlegame_template;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,9 +17,24 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_application);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        //New Game
         final Button startButton = (Button) findViewById(R.id.start);
         startButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                editor.putInt("current",0);
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //Continue
+        final Button continueButton = (Button) findViewById(R.id.continue_game);
+        continueButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -34,6 +51,17 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 finish();
                 System.exit(0);
+            }
+        });
+
+        //Reset
+        final Button resetButton = (Button) findViewById(R.id.reset);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                editor.putInt("current",0);
+                editor.putInt("unlock",0);
             }
         });
     }
