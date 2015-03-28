@@ -18,15 +18,15 @@ public class Grid {
     }
 
     public Grid(int nbPiece, int width, int height) {
-        this.caseHeight         = width;
-        this.caseWidth          = height;
+        this.caseHeight         = height;
+        this.caseWidth          = width;
         final int edgeNbCase    = (int) Math.sqrt(nbPiece);
         this.points = new ArrayList<Point>(nbPiece);
 
         for (int r = 0; r < edgeNbCase; ++r) {
             for (int c = 0; c < edgeNbCase; ++c) {
-                points.add(new Point(   r * caseHeight + PieceClassTest.left,
-                                        c * caseWidth + PieceClassTest.top));
+                points.add(new Point(   r * caseHeight + (PieceClassTest.width-edgeNbCase*this.caseWidth)/2,
+                                        c * caseWidth + (PieceClassTest.height-edgeNbCase*this.caseHeight)/2));
             }
         }
     }
