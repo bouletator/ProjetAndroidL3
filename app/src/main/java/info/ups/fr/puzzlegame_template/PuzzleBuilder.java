@@ -1,6 +1,7 @@
 package info.ups.fr.puzzlegame_template;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,13 @@ public class PuzzleBuilder {
         int xPadding = (picture.getWidth()-size)/2;
         int yPadding = (picture.getHeight()-size)/2;
         this.fullPicture = Bitmap.createBitmap(picture, xPadding, yPadding, size, size);
+
+        /* dimensionnement de l'image */
+        int maxSize = (PieceClassTest.height>PieceClassTest.width)?
+                PieceClassTest.width - PieceClassTest.left*2:
+                PieceClassTest.height - PieceClassTest.top*2;
+        if (this.fullPicture.getHeight() > maxSize)
+            this.fullPicture = Bitmap.createScaledBitmap(this.fullPicture, maxSize, maxSize, true);
     }
 
     /**
