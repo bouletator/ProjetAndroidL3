@@ -62,7 +62,7 @@ public class PieceClassTest extends View {
         top = getTop();
 
         // création du puzzle
-        Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.mesange);
+        Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.aigle);
         myPuzzle = new PuzzleBuilder(4, img);
         pieces = myPuzzle.getPieces();
         grid = new Grid(pieces.size(), myPuzzle.getSubSize(), myPuzzle.getSubSize());
@@ -99,8 +99,9 @@ public class PieceClassTest extends View {
                     p = (Piece) dragInfo.get("piece");
                     Point coords;
                     if (toSwap != null) {
-                        Log.v("Coord: ", "have a swapp piece");
-                        toSwap.setCoord((Point) dragInfo.get("posInit"));
+                        coords = (Point) dragInfo.get("posInit");
+                        toSwap.setCoord(coords);
+                        toSwap.setIdG(this.grid.getId(coords));
                         // positionnement de la première piece
                         coords = grid.closestPoint(x, y);
                     } else {
@@ -108,16 +109,32 @@ public class PieceClassTest extends View {
                     }
 
                     p.setCoord(coords);
+                    p.setIdG(this.grid.getId(coords));
 
                     // supression des dragInfos
                     this.dragInfo.clear();
 
                     invalidate();
+                    if (this.isGameFinished())
+                        Log.v("TEST: ", "jeu finis.");
+
                     return false;
                 }
         }
 
         return super.onTouchEvent(event);
+    }
+
+    /**
+     * Contrôle si le jeu est terminé, à savoir si les pièces sont toutes à la bonne place
+     * @return vrai si le jeu est fini, faux sinon
+     */
+    private boolean isGameFinished() {
+        for (Piece p : this.pieces) {
+            if (p.getIdG() != p.getIdentifiant())
+                return false;
+        }
+        return true;
     }
 
     private Piece getClosestPiece(int x, int y) {
