@@ -25,8 +25,8 @@ public class Grid {
 
         for (int r = 0; r < edgeNbCase; ++r) {
             for (int c = 0; c < edgeNbCase; ++c) {
-                points.add(new Point(   r * caseHeight + (PieceClassTest.width-edgeNbCase*this.caseWidth)/2,
-                                        c * caseWidth + (PieceClassTest.height-edgeNbCase*this.caseHeight)/2));
+                points.add(new Point(   r*caseWidth + (PieceClassTest.width-edgeNbCase*this.caseWidth)/2,
+                                        c * caseHeight + (PieceClassTest.height-edgeNbCase*this.caseHeight)/2));
             }
         }
     }
