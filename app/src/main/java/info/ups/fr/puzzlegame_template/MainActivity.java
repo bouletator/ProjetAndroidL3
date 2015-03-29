@@ -3,6 +3,7 @@ package info.ups.fr.puzzlegame_template;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -65,6 +66,17 @@ public class MainActivity extends ActionBarActivity {
                 editor.putInt("current",4);
                 editor.putInt("unlock",0);
                 editor.commit();
+            }
+        });
+
+        // Selection level
+        final Button levelSelectButton = (Button) findViewById(R.id.selection_level);
+        levelSelectButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LevelChooserActivity.class);
+                startActivity(intent);
             }
         });
     }
