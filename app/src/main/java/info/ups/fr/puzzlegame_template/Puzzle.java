@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * @author Léo Cances
  */
-public class PieceClassTest extends View {
+public class Puzzle extends View {
     public static int width, height, left, top;
     private Map<String, Object> dragInfo = new HashMap<String, Object>();
     private List<Piece> pieces = new ArrayList<Piece>();
@@ -26,14 +26,14 @@ public class PieceClassTest extends View {
     private Grid grid;
 
 
-    public PieceClassTest(Context context) {
+    public Puzzle(Context context) {
         super(context);
     }
 
-    public PieceClassTest(Context context, AttributeSet attrs) {
+    public Puzzle(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
-    public PieceClassTest(Context context, AttributeSet attrs, int defStyle) {
+    public Puzzle(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
@@ -62,8 +62,8 @@ public class PieceClassTest extends View {
         top = getTop();
 
         // création du puzzle
-        Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.chat);
-        myPuzzle = new PuzzleBuilder(4, img);
+
+        myPuzzle = new PuzzleBuilder(4, LevelChooserActivity.puzzleImage);
         pieces = myPuzzle.getPieces();
         grid = new Grid(pieces.size(), myPuzzle.getSubSize(), myPuzzle.getSubSize());
     }

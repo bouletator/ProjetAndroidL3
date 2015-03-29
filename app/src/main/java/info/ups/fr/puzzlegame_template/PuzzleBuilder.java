@@ -1,10 +1,8 @@
 package info.ups.fr.puzzlegame_template;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -29,9 +27,9 @@ public class PuzzleBuilder {
         this.fullPicture = Bitmap.createBitmap(picture, xPadding, yPadding, size, size);
 
         /* redimensionnement de l'image */
-        int maxSize = (PieceClassTest.height>PieceClassTest.width)?
-                PieceClassTest.width :
-                PieceClassTest.height;
+        int maxSize = (Puzzle.height> Puzzle.width)?
+                Puzzle.width :
+                Puzzle.height;
 
         if (maxSize>size)
             maxSize = size;

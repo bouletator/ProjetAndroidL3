@@ -70,15 +70,15 @@ public class Piece extends Drawable{
     }
 
     private void checkEdge() {
-        if (posX < PieceClassTest.left)
-            posX = PieceClassTest.left;
-        else if (posX > PieceClassTest.width)
-            posX = PieceClassTest.width;
+        if (posX < Puzzle.left)
+            posX = Puzzle.left;
+        else if (posX > Puzzle.width)
+            posX = Puzzle.width;
 
-        if (posY < PieceClassTest.top)
-            posY = PieceClassTest.top;
-        else if (posY > PieceClassTest.height)
-            posY = PieceClassTest.height;
+        if (posY < Puzzle.top)
+            posY = Puzzle.top;
+        else if (posY > Puzzle.height)
+            posY = Puzzle.height;
     }
 
     /**
