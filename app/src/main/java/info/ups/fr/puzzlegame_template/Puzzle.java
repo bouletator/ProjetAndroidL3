@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 /**
  * @author Léo Cances
@@ -63,8 +64,7 @@ public class Puzzle extends View {
         top = getTop();
         int level = getContext().getSharedPreferences("preferences",0).getInt("current",4);
         // création du puzzle
-        Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.mesange);
-        myPuzzle = new PuzzleBuilder(level, img);
+        myPuzzle = new PuzzleBuilder(4, LevelChooserActivity.puzzleImage);
         pieces = myPuzzle.getPieces();
         grid = new Grid(pieces.size(), myPuzzle.getSubSize(), myPuzzle.getSubSize());
     }
