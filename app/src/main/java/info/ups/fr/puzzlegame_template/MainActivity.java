@@ -64,6 +64,17 @@ public class MainActivity extends ActionBarActivity {
                 editor.putInt("unlock",0);
             }
         });
+
+        // Selection level
+        final Button levelSelectButton = (Button) findViewById(R.id.selection_level);
+        levelSelectButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LevelChooserActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

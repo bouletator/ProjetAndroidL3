@@ -62,7 +62,7 @@ public class PieceClassTest extends View {
         top = getTop();
 
         // création du puzzle
-        Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.aigle);
+        Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.chat);
         myPuzzle = new PuzzleBuilder(4, img);
         pieces = myPuzzle.getPieces();
         grid = new Grid(pieces.size(), myPuzzle.getSubSize(), myPuzzle.getSubSize());

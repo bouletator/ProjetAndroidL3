@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:paddingLeft="45dp"
+    android:paddingTop="45dp">
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/level_button_shape"
+        android:text="1"
+        android:id="@+id/button1"
+        android:layout_row="0"
+        android:layout_column="0" />
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/level_button_shape"
+        android:text="2"
+        android:id="@+id/button2"
+        android:layout_row="0"
+        android:layout_column="1" />
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd ="20dp"
+        android:background="@drawable/level_button_shape"
+        android:text="3"
+        android:id="@+id/button3"
+        android:layout_row="0"
+        android:layout_column="2" />
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/level_button_shape"
+        android:text="4"
+        android:id="@+id/button4"
+        android:layout_row="0"
+        android:layout_column="3" />
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/level_button_shape"
+        android:text="5"
+        android:id="@+id/button5"
+        android:layout_row="0"
+        android:layout_column="4" />
+
+</GridLayout>
