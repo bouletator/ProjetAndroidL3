@@ -28,7 +28,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                editor.putInt("current",8);
+                editor.putInt("current",2);
                 editor.commit();
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);

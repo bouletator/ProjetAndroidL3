@@ -1,6 +1,7 @@
 package info.ups.fr.puzzlegame_template;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -63,8 +64,26 @@ public class Puzzle extends View {
         top = getTop();
         int level = getContext().getSharedPreferences("preferences",0).getInt("current",4);
         // création du puzzle
-        Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.mesange);
-        myPuzzle = new PuzzleBuilder(level, img);
+        int pieceBySide = 4;
+        int idImage =  R.drawable.mesange;
+        if(level < 5){
+           idImage = R.drawable.plancton;
+           pieceBySide += level;
+        }
+        else if(level < 10){
+            idImage = R.drawable.fusee;
+            pieceBySide += level%5;
+        }
+        else if(level < 15){
+            idImage = R.drawable.chat;
+            pieceBySide += level%5;
+        }
+        else if(level < 15){
+            idImage = R.drawable.coquelicot;
+            pieceBySide += level%5;
+        }
+        Bitmap img = BitmapFactory.decodeResource(getResources(),idImage);
+        myPuzzle = new PuzzleBuilder(pieceBySide, img);
         pieces = myPuzzle.getPieces();
         grid = new Grid(pieces.size(), myPuzzle.getSubSize(), myPuzzle.getSubSize());
     }
@@ -135,6 +154,10 @@ public class Puzzle extends View {
             if (p.getIdG() != p.getIdentifiant())
                 return false;
         }
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("preferences",0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("current",sharedPreferences.getInt("current",4) + 1);
+        editor.commit();
         return true;
     }
 
