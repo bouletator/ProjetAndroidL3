@@ -2,6 +2,7 @@ package info.ups.fr.puzzlegame_template;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 editor.putInt("current",0);
+                LevelChooserActivity.puzzleImage = BitmapFactory.decodeResource(getResources(),
+                        R.drawable.plancton);
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);
             }

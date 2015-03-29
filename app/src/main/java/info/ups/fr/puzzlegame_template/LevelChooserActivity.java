@@ -1,12 +1,11 @@
 package info.ups.fr.puzzlegame_template;
 
-import android.app.Activity;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -26,7 +25,7 @@ public class LevelChooserActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LevelChooserActivity.this, GameActivity.class);
-                puzzleImage = BitmapFactory.decodeResource(getResources(), R.drawable.fusee);
+                puzzleImage = BitmapFactory.decodeResource(getResources(), R.drawable.plancton);
 
                 startActivity(intent);
             }
@@ -39,7 +38,7 @@ public class LevelChooserActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LevelChooserActivity.this, GameActivity.class);
-                puzzleImage = BitmapFactory.decodeResource(getResources(), R.drawable.chat);
+                puzzleImage = BitmapFactory.decodeResource(getResources(), R.drawable.fusee);
 
                 startActivity(intent);
             }
@@ -52,7 +51,7 @@ public class LevelChooserActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LevelChooserActivity.this, GameActivity.class);
-                puzzleImage = BitmapFactory.decodeResource(getResources(), R.drawable.aigle);
+                puzzleImage = BitmapFactory.decodeResource(getResources(), R.drawable.chat);
 
                 startActivity(intent);
             }
@@ -65,7 +64,7 @@ public class LevelChooserActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LevelChooserActivity.this, GameActivity.class);
-                puzzleImage = BitmapFactory.decodeResource(getResources(), R.drawable.plancton);
+                puzzleImage = BitmapFactory.decodeResource(getResources(), R.drawable.aigle);
                 startActivity(intent);
             }
         });
