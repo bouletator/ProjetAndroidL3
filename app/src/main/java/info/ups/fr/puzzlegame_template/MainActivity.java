@@ -28,7 +28,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                editor.putInt("current",8);
+                editor.putInt("current",0);
                 editor.commit();
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);
@@ -63,7 +63,8 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                editor.putInt("current",4);
+                editor.putInt("current",0);
+                editor.commit();
                 editor.putInt("unlock",0);
                 editor.commit();
             }
