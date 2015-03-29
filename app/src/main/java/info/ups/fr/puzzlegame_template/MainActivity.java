@@ -30,6 +30,7 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 editor.putInt("current",0);
                 editor.commit();
+                LevelChooserActivity.puzzleImage = BitmapFactory.decodeResource(getResources(), R.drawable.plancton);
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);
             }
