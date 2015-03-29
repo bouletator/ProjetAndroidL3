@@ -1,7 +1,6 @@
 package info.ups.fr.puzzlegame_template;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
 /**
  * @author Léo Cances
@@ -62,8 +60,9 @@ public class Puzzle extends View {
         height = getHeight();
         left = getLeft();
         top = getTop();
-        int level = getContext().getSharedPreferences("preferences",0).getInt("current",4);
+
         // création du puzzle
+
         myPuzzle = new PuzzleBuilder(4, LevelChooserActivity.puzzleImage);
         pieces = myPuzzle.getPieces();
         grid = new Grid(pieces.size(), myPuzzle.getSubSize(), myPuzzle.getSubSize());
