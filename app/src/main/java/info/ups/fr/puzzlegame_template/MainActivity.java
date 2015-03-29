@@ -2,6 +2,7 @@ package info.ups.fr.puzzlegame_template;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_application);
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPreferences = getSharedPreferences("preferences",0);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
 
         //New Game
@@ -26,7 +27,8 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                editor.putInt("current",0);
+                editor.putInt("current",8);
+                editor.commit();
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);
             }
@@ -60,8 +62,9 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                editor.putInt("current",0);
+                editor.putInt("current",4);
                 editor.putInt("unlock",0);
+                editor.commit();
             }
         });
     }

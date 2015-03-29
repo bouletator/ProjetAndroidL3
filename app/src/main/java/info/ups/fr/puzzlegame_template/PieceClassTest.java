@@ -1,6 +1,7 @@
 package info.ups.fr.puzzlegame_template;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -60,10 +61,10 @@ public class PieceClassTest extends View {
         height = getHeight();
         left = getLeft();
         top = getTop();
-
+        int level = getContext().getSharedPreferences("preferences",0).getInt("current",4);
         // création du puzzle
-        Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.aigle);
-        myPuzzle = new PuzzleBuilder(4, img);
+        Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.mesange);
+        myPuzzle = new PuzzleBuilder(level, img);
         pieces = myPuzzle.getPieces();
         grid = new Grid(pieces.size(), myPuzzle.getSubSize(), myPuzzle.getSubSize());
     }
