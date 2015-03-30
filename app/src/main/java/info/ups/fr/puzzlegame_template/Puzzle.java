@@ -1,6 +1,7 @@
 package info.ups.fr.puzzlegame_template;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -61,6 +62,10 @@ public class Puzzle extends View {
         left = getLeft();
         top = getTop();
 
+        this.initPuzzle();
+    }
+
+    private void initPuzzle() {
         // calcul des paramètres:
         int level = getContext().getSharedPreferences("preferences", 0).getInt("current_level",0);
         int imageId = R.drawable.plancton;
@@ -69,7 +74,7 @@ public class Puzzle extends View {
                 imageId  = R.drawable.plancton;
                 break;
             case 1  :
-            imageId  = R.drawable.fusee;
+                imageId  = R.drawable.fusee;
                 break;
             case 2  :
                 imageId  = R.drawable.chat;
@@ -89,6 +94,8 @@ public class Puzzle extends View {
         myPuzzle = new PuzzleBuilder(subdivizionNumber, BitmapFactory.decodeResource(getResources(), imageId));
         pieces = myPuzzle.getPieces();
         grid = new Grid(pieces.size(), myPuzzle.getSubSize(), myPuzzle.getSubSize());
+
+        this.invalidate();
     }
 
     @Override
@@ -138,8 +145,15 @@ public class Puzzle extends View {
                     this.dragInfo.clear();
 
                     invalidate();
-                    if (this.isGameFinished())
+                    if (this.isGameFinished()){
                         Log.v("TEST: ", "jeu finis.");
+                        SharedPreferences preferences = getContext().getSharedPreferences("preferences", 0);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putInt("current_level", preferences.getInt("current_level", 0) + 1);
+                        editor.commit();
+                        this.initPuzzle();
+                    }
+
 
                     return false;
                 }
