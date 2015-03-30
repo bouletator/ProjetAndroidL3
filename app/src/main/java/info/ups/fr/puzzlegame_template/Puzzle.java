@@ -146,11 +146,15 @@ public class Puzzle extends View {
 
                     invalidate();
                     if (this.isGameFinished()){
-                        Log.v("TEST: ", "jeu finis.");
                         SharedPreferences preferences = getContext().getSharedPreferences("preferences", 0);
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putInt("current_level", preferences.getInt("current_level", 0) + 1);
                         editor.commit();
+
+                        if (preferences.getInt("current_level",0) > preferences.getInt("unlock", 0)) {
+                            editor.putInt("unlock", preferences.getInt("current_level", 0));
+                            editor.commit();
+                        }
                         this.initPuzzle();
                     }
 

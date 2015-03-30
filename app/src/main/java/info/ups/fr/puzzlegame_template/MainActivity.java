@@ -28,9 +28,8 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                editor.putInt("current_level",0);
+                editor.putInt("current_level", 0);
                 editor.commit();
-                LevelChooserActivity.puzzleImage = BitmapFactory.decodeResource(getResources(), R.drawable.plancton);
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);
             }
@@ -72,6 +71,9 @@ public class MainActivity extends ActionBarActivity {
                 editor.commit();
                 editor.putInt("unlock",0);
                 editor.commit();
+
+                continueButton.setEnabled(false);
+                continueButton.invalidate();
             }
         });
 
@@ -108,5 +110,14 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (getSharedPreferences("preferences",0).getInt("current_level", 0)>0) {
+            findViewById(R.id.continue_game).setEnabled(true);
+            findViewById(R.id.continue_game).invalidate();
+        }
     }
 }

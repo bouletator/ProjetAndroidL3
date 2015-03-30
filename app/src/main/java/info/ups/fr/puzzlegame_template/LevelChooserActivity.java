@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 
 public class LevelChooserActivity extends ActionBarActivity {
-    public static Bitmap puzzleImage;
+    private ArrayList<Button> buttons = new ArrayList<Button>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,6 @@ public class LevelChooserActivity extends ActionBarActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("preferences",0);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
-        ArrayList<Button> buttons = new ArrayList<Button>();
 
         buttons.add((Button) findViewById(R.id.button0));
         buttons.add((Button) findViewById(R.id.button1));
@@ -51,6 +50,7 @@ public class LevelChooserActivity extends ActionBarActivity {
         buttons.add((Button) findViewById(R.id.button23));
         buttons.add((Button) findViewById(R.id.button24));
 
+        int unlockedLevel = sharedPreferences.getInt("unlock", 0);
         for (Button b : buttons) {
             final int level =  Integer.parseInt(b.getText().toString())- 1;
             b.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +63,28 @@ public class LevelChooserActivity extends ActionBarActivity {
                      startActivity(intent);
                  }
             });
+
+            if (level>unlockedLevel) {
+                b.setEnabled(false);
+            }
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("preferences",0);
+        int unlockedLevel = sharedPreferences.getInt("unlock", 0);
+
+        for (Button b : buttons) {
+            final int level =  Integer.parseInt(b.getText().toString())- 1;
+            if (level>unlockedLevel) {
+                b.setEnabled(false);
+            } else {
+                b.setEnabled(true);
+            }
+            b.invalidate();
         }
     }
 }
