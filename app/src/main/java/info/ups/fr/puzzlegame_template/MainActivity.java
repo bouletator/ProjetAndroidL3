@@ -28,7 +28,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                editor.putInt("current",0);
+                editor.putInt("current_level",0);
                 editor.commit();
                 LevelChooserActivity.puzzleImage = BitmapFactory.decodeResource(getResources(), R.drawable.plancton);
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
@@ -46,6 +46,10 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+        if (! sharedPreferences.contains("current_level") || sharedPreferences.getInt("current_level",0) == 0) {
+            continueButton.setEnabled(false);
+            continueButton.invalidate();
+        }
 
         //Exit
         final Button exitButton = (Button) findViewById(R.id.exit);
@@ -64,7 +68,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                editor.putInt("current",0);
+                editor.putInt("current_level",0);
                 editor.commit();
                 editor.putInt("unlock",0);
                 editor.commit();

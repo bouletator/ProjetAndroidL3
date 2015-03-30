@@ -2,12 +2,15 @@ package info.ups.fr.puzzlegame_template;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
+
+import java.util.ArrayList;
 
 
 public class LevelChooserActivity extends ActionBarActivity {
@@ -18,69 +21,48 @@ public class LevelChooserActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.level_chooser);
 
-        //Level 1
-        final Button lvl1 = (Button) findViewById(R.id.button1);
-        lvl1.setOnClickListener(new View.OnClickListener() {
+        SharedPreferences sharedPreferences = getSharedPreferences("preferences",0);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        ArrayList<Button> buttons = new ArrayList<Button>();
 
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LevelChooserActivity.this, GameActivity.class);
-                puzzleImage = BitmapFactory.decodeResource(getResources(), R.drawable.plancton);
+        buttons.add((Button) findViewById(R.id.button0));
+        buttons.add((Button) findViewById(R.id.button1));
+        buttons.add((Button) findViewById(R.id.button2));
+        buttons.add((Button) findViewById(R.id.button3));
+        buttons.add((Button) findViewById(R.id.button4));
+        buttons.add((Button) findViewById(R.id.button5));
+        buttons.add((Button) findViewById(R.id.button6));
+        buttons.add((Button) findViewById(R.id.button7));
+        buttons.add((Button) findViewById(R.id.button8));
+        buttons.add((Button) findViewById(R.id.button9));
+        buttons.add((Button) findViewById(R.id.button10));
+        buttons.add((Button) findViewById(R.id.button11));
+        buttons.add((Button) findViewById(R.id.button12));
+        buttons.add((Button) findViewById(R.id.button13));
+        buttons.add((Button) findViewById(R.id.button14));
+        buttons.add((Button) findViewById(R.id.button15));
+        buttons.add((Button) findViewById(R.id.button16));
+        buttons.add((Button) findViewById(R.id.button17));
+        buttons.add((Button) findViewById(R.id.button18));
+        buttons.add((Button) findViewById(R.id.button19));
+        buttons.add((Button) findViewById(R.id.button20));
+        buttons.add((Button) findViewById(R.id.button21));
+        buttons.add((Button) findViewById(R.id.button22));
+        buttons.add((Button) findViewById(R.id.button23));
+        buttons.add((Button) findViewById(R.id.button24));
 
-                startActivity(intent);
-            }
-        });
+        for (Button b : buttons) {
+            final int level =  Integer.parseInt(b.getText().toString())- 1;
+            b.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     Intent intent = new Intent(LevelChooserActivity.this, GameActivity.class);
+                     editor.putInt("current_level",level);
+                     editor.commit();
 
-        //Level 2
-        final Button lvl2 = (Button) findViewById(R.id.button2);
-        lvl2.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LevelChooserActivity.this, GameActivity.class);
-                puzzleImage = BitmapFactory.decodeResource(getResources(), R.drawable.fusee);
-
-                startActivity(intent);
-            }
-        });
-
-        //level 3
-        final Button lvl3 = (Button) findViewById(R.id.button3);
-        lvl3.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LevelChooserActivity.this, GameActivity.class);
-                puzzleImage = BitmapFactory.decodeResource(getResources(), R.drawable.chat);
-
-                startActivity(intent);
-            }
-        });
-
-        //level 4
-        final Button lvl4 = (Button) findViewById(R.id.button4);
-        lvl4.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LevelChooserActivity.this, GameActivity.class);
-                puzzleImage = BitmapFactory.decodeResource(getResources(), R.drawable.aigle);
-                startActivity(intent);
-            }
-        });
-
-        //level 5
-        final Button lvl5 = (Button) findViewById(R.id.button5);
-        lvl5.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LevelChooserActivity.this, GameActivity.class);
-                puzzleImage = BitmapFactory.decodeResource(getResources(), R.drawable.coquelicot);
-                startActivity(intent);
-            }
-        });
-
-
+                     startActivity(intent);
+                 }
+            });
+        }
     }
 }

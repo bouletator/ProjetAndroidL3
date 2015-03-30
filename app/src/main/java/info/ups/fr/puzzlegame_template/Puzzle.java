@@ -61,9 +61,32 @@ public class Puzzle extends View {
         left = getLeft();
         top = getTop();
 
+        // calcul des paramètres:
+        int level = getContext().getSharedPreferences("preferences", 0).getInt("current_level",0);
+        int imageId = R.drawable.plancton;
+        switch (level%5) {
+            case 0  :
+                imageId  = R.drawable.plancton;
+                break;
+            case 1  :
+            imageId  = R.drawable.fusee;
+                break;
+            case 2  :
+                imageId  = R.drawable.chat;
+                break;
+            case 3  :
+                imageId  = R.drawable.aigle;
+                break;
+            case 4  :
+                imageId  = R.drawable.coquelicot;
+                break;
+        }
+
+        int subdivizionNumber = 4+level/5;
+
         // création du puzzle
 
-        myPuzzle = new PuzzleBuilder(4, LevelChooserActivity.puzzleImage);
+        myPuzzle = new PuzzleBuilder(subdivizionNumber, BitmapFactory.decodeResource(getResources(), imageId));
         pieces = myPuzzle.getPieces();
         grid = new Grid(pieces.size(), myPuzzle.getSubSize(), myPuzzle.getSubSize());
     }
