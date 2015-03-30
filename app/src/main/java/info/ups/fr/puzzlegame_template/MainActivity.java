@@ -30,6 +30,8 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 editor.putInt("current_level", 0);
                 editor.commit();
+                editor.remove("pieces_ids");
+                editor.commit();
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);
             }
@@ -71,6 +73,8 @@ public class MainActivity extends ActionBarActivity {
                 editor.commit();
                 editor.putInt("unlock",0);
                 editor.commit();
+                editor.remove("pieces_ids");
+                editor.commit();
 
                 continueButton.setEnabled(false);
                 continueButton.invalidate();
@@ -84,6 +88,8 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LevelChooserActivity.class);
+                editor.remove("pieces_ids");
+                editor.commit();
                 startActivity(intent);
             }
         });

@@ -138,4 +138,9 @@ public class Piece extends Drawable{
 
     @Override
     public int getOpacity() {return 0;}
+
+    @Override
+    public String toString() {
+        return "[" + id + "," + idG + "]";
+    }
 }

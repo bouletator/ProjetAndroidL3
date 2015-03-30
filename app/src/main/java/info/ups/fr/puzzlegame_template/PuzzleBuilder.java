@@ -1,5 +1,6 @@
 package info.ups.fr.puzzlegame_template;
 
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 
 import java.util.ArrayList;
@@ -13,18 +14,29 @@ public class PuzzleBuilder {
     /* Attributs */
     private int level;
     private Bitmap fullPicture;
+    private ArrayList<Integer> piecesIds;
 
     /* Constructor */
     public PuzzleBuilder(int lvl, Bitmap picture) {
         this.level = lvl;
+        this.createPicture(picture);
+        this.piecesIds = null;
+    }
 
+    public PuzzleBuilder(int lvl, Bitmap picture, String piecesIndex) {
+        this.level = lvl;
+        this.createPicture(picture);
+        this.piecesIds = this.parsePiecesIds(piecesIndex);
+    }
+
+    private void createPicture(Bitmap rawPicture) {
         /* rend l'image carrée */
-        int size = (picture.getHeight() < picture.getWidth())?
-                picture.getHeight() :
-                picture.getWidth();
-        int xPadding = (picture.getWidth()-size)/2;
-        int yPadding = (picture.getHeight()-size)/2;
-        this.fullPicture = Bitmap.createBitmap(picture, xPadding, yPadding, size, size);
+        int size = (rawPicture.getHeight() < rawPicture.getWidth())?
+                rawPicture.getHeight() :
+                rawPicture.getWidth();
+        int xPadding = (rawPicture.getWidth()-size)/2;
+        int yPadding = (rawPicture.getHeight()-size)/2;
+        this.fullPicture = Bitmap.createBitmap(rawPicture, xPadding, yPadding, size, size);
 
         /* redimensionnement de l'image */
         int maxSize = (Puzzle.height> Puzzle.width)?
@@ -34,11 +46,13 @@ public class PuzzleBuilder {
         if (maxSize>size)
             maxSize = size;
 
-        while (maxSize%lvl != 0) // on rend l'image divisible en part égales
+        while (maxSize%this.level != 0) // on rend l'image divisible en part égales
             --maxSize;
 
         this.fullPicture = Bitmap.createScaledBitmap(this.fullPicture, maxSize, maxSize, true);
     }
+
+
 
     /**
      * @return la taille d'une sous image du puzzle
@@ -100,6 +114,22 @@ public class PuzzleBuilder {
         return randomList;
     }
 
+    /* NE PAS CHERCHER A COMPRENDRE, ATTENTION DANGEUREUX POUR VOTRE CERVEAU!!!!! */
+    private ArrayList<Integer> parsePiecesIds(String values) {
+        String[] tab = values.split("\\], \\[");
+        tab[0] = tab[0].substring(2);
+        tab[tab.length-1] = tab[tab.length-1].substring(0,tab[tab.length-1].length()-2);
+
+        String[] couple;
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        for (String str : tab) {
+            couple = str.split(",");
+            result.add(Integer.parseInt(couple[0]), Integer.parseInt(couple[1]));
+        }
+
+        return result;
+    }
+
     /**
      *
      * @return Une liste de pièces dont les positions sont mélangées
@@ -108,7 +138,7 @@ public class PuzzleBuilder {
         ArrayList<Piece> pieces = new ArrayList<Piece>();
 
         ArrayList<Bitmap> pictures = this.dividePicture();
-        ArrayList<Integer> indexes = this.shuffle();
+        ArrayList<Integer> indexes = (this.piecesIds==null)? this.shuffle() : this.piecesIds;
 
         Grid grid = new Grid(pictures.size(), this.getSubSize(), this.getSubSize());
 

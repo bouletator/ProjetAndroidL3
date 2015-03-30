@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author Léo Cances
+ * @author Léo Cances ~~~
  */
 public class Puzzle extends View {
     public static int width, height, left, top;
@@ -66,8 +66,10 @@ public class Puzzle extends View {
     }
 
     private void initPuzzle() {
+        SharedPreferences preferences = getContext().getSharedPreferences("preferences", 0);
+
         // calcul des paramètres:
-        int level = getContext().getSharedPreferences("preferences", 0).getInt("current_level",0);
+        int level = preferences.getInt("current_level",0);
         int imageId = R.drawable.plancton;
         switch (level%5) {
             case 0  :
@@ -91,7 +93,13 @@ public class Puzzle extends View {
 
         // création du puzzle
 
-        myPuzzle = new PuzzleBuilder(subdivizionNumber, BitmapFactory.decodeResource(getResources(), imageId));
+        if (preferences.contains("pieces_ids")) {
+            myPuzzle = new PuzzleBuilder(subdivizionNumber, BitmapFactory.decodeResource(getResources(), imageId), preferences.getString("pieces_ids", ""));
+        }
+        else {
+            myPuzzle = new PuzzleBuilder(subdivizionNumber, BitmapFactory.decodeResource(getResources(), imageId));
+        }
+
         pieces = myPuzzle.getPieces();
         grid = new Grid(pieces.size(), myPuzzle.getSubSize(), myPuzzle.getSubSize());
 
@@ -140,31 +148,38 @@ public class Puzzle extends View {
 
                     p.setCoord(coords);
                     p.setIdG(this.grid.getId(coords));
-
-                    // supression des dragInfos
                     this.dragInfo.clear();
 
-                    invalidate();
-                    if (this.isGameFinished()){
-                        SharedPreferences preferences = getContext().getSharedPreferences("preferences", 0);
-                        SharedPreferences.Editor editor = preferences.edit();
+
+                    SharedPreferences preferences = getContext().getSharedPreferences("preferences", 0);
+                    SharedPreferences.Editor editor = preferences.edit();
+
+                    editor.putString("pieces_ids", this.pieces.toString());
+                    editor.commit();
+
+                    if (this.isGameFinished()) {
+
                         editor.putInt("current_level", preferences.getInt("current_level", 0) + 1);
                         editor.commit();
 
-                        if (preferences.getInt("current_level",0) > preferences.getInt("unlock", 0)) {
+                        editor.remove("pieces_ids");
+                        editor.commit();
+
+                        if (preferences.getInt("current_level", 0) > preferences.getInt("unlock", 0)) {
                             editor.putInt("unlock", preferences.getInt("current_level", 0));
                             editor.commit();
                         }
                         this.initPuzzle();
                     }
-
-
-                    return false;
                 }
-        }
+                    invalidate();
+                    return false;
+            }
 
         return super.onTouchEvent(event);
     }
+
+
 
     /**
      * Contrôle si le jeu est terminé, à savoir si les pièces sont toutes à la bonne place
