@@ -2,12 +2,10 @@ package info.ups.fr.puzzlegame_template;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -21,11 +19,10 @@ import java.util.Map;
  */
 public class Puzzle extends View {
     public static int width, height, left, top;
-    private Map<String, Object> dragInfo = new HashMap<String, Object>();
-    private List<Piece> pieces = new ArrayList<Piece>();
-    private PuzzleBuilder myPuzzle;
-    private Grid grid;
-
+    private static Map<String, Object> dragInfo = new HashMap<String, Object>();
+    public static List<Piece> pieces = new ArrayList<Piece>();
+    private static PuzzleBuilder myPuzzle;
+    private static Grid grid;
 
     public Puzzle(Context context) {
         super(context);
@@ -65,7 +62,7 @@ public class Puzzle extends View {
         this.initPuzzle();
     }
 
-    private void initPuzzle() {
+    public void initPuzzle() {
         SharedPreferences preferences = getContext().getSharedPreferences("preferences", 0);
 
         // calcul des paramètres:
@@ -179,6 +176,9 @@ public class Puzzle extends View {
         return super.onTouchEvent(event);
     }
 
+    public static void shuffle() {
+        pieces = myPuzzle.getPieces();
+    }
 
 
     /**
