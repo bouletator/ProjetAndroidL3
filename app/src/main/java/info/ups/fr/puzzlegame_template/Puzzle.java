@@ -159,15 +159,16 @@ public class Puzzle extends View {
                     if (this.isGameFinished()) {
 
                         editor.putInt("current_level", preferences.getInt("current_level", 0) + 1);
-                        editor.commit();
+                        editor.apply();
 
                         editor.remove("pieces_ids");
-                        editor.commit();
+                        editor.apply();
 
                         if (preferences.getInt("current_level", 0) > preferences.getInt("unlock", 0)) {
                             editor.putInt("unlock", preferences.getInt("current_level", 0));
-                            editor.commit();
+                            editor.apply();
                         }
+                        editor.commit();
                         this.initPuzzle();
                     }
                 }
