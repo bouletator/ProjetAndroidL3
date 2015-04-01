@@ -9,5 +9,6 @@
     <string name="selection_level">Selection Level</string>
     <string name="reset_button">Reset</string>
     <string name="exit_button">Exit</string>
+    <string name="choose_level_title">Choose your level</string>
 
 </resources>

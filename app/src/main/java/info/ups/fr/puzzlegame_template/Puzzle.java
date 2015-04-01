@@ -1,5 +1,6 @@
 package info.ups.fr.puzzlegame_template;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
@@ -23,6 +24,7 @@ public class Puzzle extends View {
     public static List<Piece> pieces = new ArrayList<Piece>();
     private static PuzzleBuilder myPuzzle;
     private static Grid grid;
+    private GameActivity gameActivity;
 
     public Puzzle(Context context) {
         super(context);
@@ -38,7 +40,7 @@ public class Puzzle extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+        gameActivity = (GameActivity) getContext();
         for (Piece p : pieces) {
             p.draw(canvas);
         }
@@ -52,7 +54,7 @@ public class Puzzle extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-
+        gameActivity = (GameActivity) getContext();
         // Récupération taille de la vue
         width = getWidth();
         height = getHeight();
@@ -64,7 +66,7 @@ public class Puzzle extends View {
 
     public void initPuzzle() {
         SharedPreferences preferences = getContext().getSharedPreferences("preferences", 0);
-
+        gameActivity.setTitle("Level "+(preferences.getInt("current_level",0)+1));
         // calcul des paramètres:
         int level = preferences.getInt("current_level",0);
         int imageId = R.drawable.plancton;
