@@ -1,53 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="40dp"
-    android:paddingRight="40dp" >
+    android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/menu_button_shape"
-        android:text="@string/start"
-        android:id="@+id/start"
-        android:layout_gravity="center_horizontal" />
 
-    <Button
-        android:layout_width="match_parent"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/menu_button_shape"
-        android:text="@string/continue_game"
-        android:id="@+id/continue_game"
-        android:layout_gravity="center_horizontal" />
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp" >
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/menu_button_shape"
-        android:text="@string/selection_level"
-        android:id="@+id/selection_level"
-        android:layout_gravity="center_horizontal" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/menu_button_shape"
+            android:text="@string/start"
+            android:id="@+id/start"
+            android:layout_gravity="center_horizontal" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/menu_button_shape"
-        android:text="@string/reset_button"
-        android:id="@+id/reset"
-        android:layout_gravity="center_horizontal" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/menu_button_shape"
+            android:text="@string/continue_game"
+            android:id="@+id/continue_game"
+            android:layout_gravity="center_horizontal" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/menu_button_shape"
-        android:text="@string/exit_button"
-        android:id="@+id/exit"
-        android:layout_gravity="center_horizontal" />
-</LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/menu_button_shape"
+            android:text="@string/selection_level"
+            android:id="@+id/selection_level"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/menu_button_shape"
+            android:text="@string/reset_button"
+            android:id="@+id/reset"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="100dp"
+            android:background="@drawable/menu_button_shape"
+            android:text="@string/exit_button"
+            android:id="@+id/exit"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+</ScrollView>
