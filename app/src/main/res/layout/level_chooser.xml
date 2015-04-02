@@ -12,13 +12,8 @@
         >
 
         <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:text="très facile"
-            android:textStyle="bold"
-            android:textSize="36sp"
-            android:gravity="center"/>
+            style="@style/LevelChooserText"
+            android:text="très facile"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -26,19 +21,13 @@
             android:layout_height="wrap_content" >
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/LevelChooserButtons"
                 android:text="1"
                 android:background="@drawable/plancton"
                 android:id="@+id/button0" />
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/LevelChooserButtons"
                 android:text="2"
                 android:background="@drawable/fusee"
                 android:id="@+id/button1" />
@@ -50,42 +39,29 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/LevelChooserButtons"
                 android:text="3"
                 android:background="@drawable/chat"
                 android:id="@+id/button2" />
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/LevelChooserButtons"
                 android:text="4"
                 android:background="@drawable/aigle"
                 android:id="@+id/button3" />
         </LinearLayout>
 
         <Button
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/LevelChooserButtons"
             android:layout_gravity="center"
             android:text="5"
             android:background="@drawable/coquelicot"
             android:id="@+id/button4" />
 
         <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            style="@style/LevelChooserText"
             android:background="#ffffff"
-            android:text="facile"
-            android:textStyle="bold"
-            android:textSize="36sp"
-            android:gravity="center"/>
+            android:text="facile"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -93,19 +69,13 @@
             android:layout_height="wrap_content" >
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/LevelChooserButtons"
                 android:text="6"
                 android:background="@drawable/plancton"
                 android:id="@+id/button5" />
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/LevelChooserButtons"
                 android:text="7"
                 android:background="@drawable/fusee"
                 android:id="@+id/button6" />
@@ -117,42 +87,28 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/LevelChooserButtons"
                 android:text="8"
                 android:background="@drawable/chat"
                 android:id="@+id/button7" />
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/LevelChooserButtons"
                 android:text="9"
                 android:background="@drawable/aigle"
                 android:id="@+id/button8" />
         </LinearLayout>
 
         <Button
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/LevelChooserButtons"
             android:layout_gravity="center"
             android:text="10"
             android:background="@drawable/coquelicot"
             android:id="@+id/button9" />
 
         <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:text="normal"
-            android:textStyle="bold"
-            android:textSize="36sp"
-            android:gravity="center"/>
+            style="@style/LevelChooserText"
+            android:text="normal"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -160,19 +116,13 @@
             android:layout_height="wrap_content" >
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/LevelChooserButtons"
                 android:text="11"
                 android:background="@drawable/plancton"
                 android:id="@+id/button10" />
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/LevelChooserButtons"
                 android:text="12"
                 android:background="@drawable/fusee"
                 android:id="@+id/button11" />
@@ -184,42 +134,28 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/LevelChooserButtons"
                 android:text="13"
                 android:background="@drawable/chat"
                 android:id="@+id/button12" />
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/LevelChooserButtons"
                 android:text="14"
                 android:background="@drawable/aigle"
                 android:id="@+id/button13" />
         </LinearLayout>
 
         <Button
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/LevelChooserButtons"
             android:layout_gravity="center"
             android:text="15"
             android:background="@drawable/coquelicot"
             android:id="@+id/button14" />
 
         <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="difficile"
-            android:background="#ffffff"
-            android:textStyle="bold"
-            android:textSize="36sp"
-            android:gravity="center"/>
+            style="@style/LevelChooserText"
+            android:text="difficile"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -227,19 +163,13 @@
             android:layout_height="wrap_content" >
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/LevelChooserButtons"
                 android:text="16"
                 android:background="@drawable/plancton"
                 android:id="@+id/button15" />
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/LevelChooserButtons"
                 android:text="17"
                 android:background="@drawable/fusee"
                 android:id="@+id/button16" />
@@ -251,42 +181,28 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/LevelChooserButtons"
                 android:text="18"
                 android:background="@drawable/chat"
                 android:id="@+id/button17" />
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/LevelChooserButtons"
                 android:text="19"
                 android:background="@drawable/aigle"
                 android:id="@+id/button18" />
         </LinearLayout>
 
         <Button
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/LevelChooserButtons"
             android:layout_gravity="center"
             android:text="20"
             android:background="@drawable/coquelicot"
             android:id="@+id/button19" />
 
         <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="hardcore"
-            android:background="#ffffff"
-            android:textStyle="bold"
-            android:textSize="36sp"
-            android:gravity="center"/>
+            style="@style/LevelChooserText"
+            android:text="hardcore"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -294,19 +210,13 @@
             android:layout_height="wrap_content" >
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/LevelChooserButtons"
                 android:text="21"
                 android:background="@drawable/plancton"
                 android:id="@+id/button20" />
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/LevelChooserButtons"
                 android:text="22"
                 android:background="@drawable/fusee"
                 android:id="@+id/button21" />
@@ -318,29 +228,20 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/LevelChooserButtons"
                 android:text="23"
                 android:background="@drawable/chat"
                 android:id="@+id/button22" />
 
             <Button
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/LevelChooserButtons"
                 android:text="24"
                 android:background="@drawable/aigle"
                 android:id="@+id/button23" />
         </LinearLayout>
 
         <Button
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/LevelChooserButtons"
             android:layout_gravity="center"
             android:text="25"
             android:background="@drawable/coquelicot"

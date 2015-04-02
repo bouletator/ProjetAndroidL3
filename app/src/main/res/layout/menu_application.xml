@@ -12,49 +12,31 @@
         android:paddingRight="40dp" >
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:background="@drawable/menu_button_shape"
+            style="@style/MenuButton"
+            android:layout_marginTop="80dp"
             android:text="@string/start"
-            android:id="@+id/start"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/start" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/menu_button_shape"
+            style="@style/MenuButton"
             android:text="@string/continue_game"
-            android:id="@+id/continue_game"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/continue_game" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/menu_button_shape"
+            style="@style/MenuButton"
             android:text="@string/selection_level"
-            android:id="@+id/selection_level"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/selection_level" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/menu_button_shape"
+            style="@style/MenuButton"
             android:text="@string/reset_button"
-            android:id="@+id/reset"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/reset" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/MenuButton"
             android:layout_marginTop="100dp"
             android:layout_marginBottom="100dp"
-            android:background="@drawable/menu_button_shape"
             android:text="@string/exit_button"
-            android:id="@+id/exit"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/exit" />
     </LinearLayout>
 </ScrollView>

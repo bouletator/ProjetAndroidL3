@@ -5,4 +5,31 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!-- Boutons du menu principal -->
+    <style name="MenuButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">25dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:background">@drawable/menu_button_shape</item>
+    </style>
+
+    <!-- Textes du selecteur de niveau -->
+    <style name="LevelChooserText">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">#ffffff</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- Style des boutons du selecteur de niveau -->
+    <style name="LevelChooserButtons">
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>
