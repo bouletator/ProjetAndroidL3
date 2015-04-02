@@ -1,13 +1,18 @@
 package info.ups.fr.puzzlegame_template;
 
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import java.util.ArrayList;
@@ -20,6 +25,9 @@ public class LevelChooserActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.level_chooser);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
         SharedPreferences sharedPreferences = getSharedPreferences("preferences",0);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -53,6 +61,14 @@ public class LevelChooserActivity extends ActionBarActivity {
         int unlockedLevel = sharedPreferences.getInt("unlock", 0);
         for (Button b : buttons) {
             final int level =  Integer.parseInt(b.getText().toString())- 1;
+
+            // Modification taille des boutons
+            ViewGroup.LayoutParams param = b.getLayoutParams();
+            param.width = metrics.widthPixels / 2;
+            param.height = metrics.widthPixels / 2;
+            b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 32.0f);
+            b.setTextColor(Color.WHITE);
+
             b.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View v) {
@@ -66,7 +82,9 @@ public class LevelChooserActivity extends ActionBarActivity {
 
             if (level>unlockedLevel) {
                 b.setEnabled(false);
+                b.setAlpha(0.32f);
             }
+
         }
     }
 
@@ -81,8 +99,10 @@ public class LevelChooserActivity extends ActionBarActivity {
             final int level =  Integer.parseInt(b.getText().toString())- 1;
             if (level>unlockedLevel) {
                 b.setEnabled(false);
+                b.setAlpha(0.32f);
             } else {
                 b.setEnabled(true);
+                b.setAlpha(1.0f);
             }
             b.invalidate();
         }

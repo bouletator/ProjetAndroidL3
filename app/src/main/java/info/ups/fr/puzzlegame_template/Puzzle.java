@@ -25,6 +25,7 @@ public class Puzzle extends View {
     private static PuzzleBuilder myPuzzle;
     private static Grid grid;
     private GameActivity gameActivity;
+    private boolean takeASleep = false;
 
     public Puzzle(Context context) {
         super(context);
@@ -48,6 +49,16 @@ public class Puzzle extends View {
         if (dragInfo.containsKey("piece")) {
             Piece p = (Piece) dragInfo.get("piece");
             p.draw(canvas);
+        }
+
+        if (takeASleep) {
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            takeASleep = false;
+            newPuzzle();
         }
     }
 
@@ -157,19 +168,8 @@ public class Puzzle extends View {
                     editor.commit();
 
                     if (this.isGameFinished()) {
-
-                        editor.putInt("current_level", preferences.getInt("current_level", 0) + 1);
-                        editor.apply();
-
-                        editor.remove("pieces_ids");
-                        editor.apply();
-
-                        if (preferences.getInt("current_level", 0) > preferences.getInt("unlock", 0)) {
-                            editor.putInt("unlock", preferences.getInt("current_level", 0));
-                            editor.apply();
-                        }
-                        editor.commit();
-                        this.initPuzzle();
+                        takeASleep = true;
+                        invalidate();
                     }
                 }
                     invalidate();
@@ -177,6 +177,24 @@ public class Puzzle extends View {
             }
 
         return super.onTouchEvent(event);
+    }
+
+    private void newPuzzle() {
+        SharedPreferences preferences = getContext().getSharedPreferences("preferences", 0);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putInt("current_level", preferences.getInt("current_level", 0) + 1);
+        editor.apply();
+
+        editor.remove("pieces_ids");
+        editor.apply();
+
+        if (preferences.getInt("current_level", 0) > preferences.getInt("unlock", 0)) {
+            editor.putInt("unlock", preferences.getInt("current_level", 0));
+            editor.apply();
+        }
+        editor.commit();
+        this.initPuzzle();
     }
 
     public static void shuffle() {
