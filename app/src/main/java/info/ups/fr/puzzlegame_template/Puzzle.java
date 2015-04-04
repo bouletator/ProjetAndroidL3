@@ -1,12 +1,12 @@
 package info.ups.fr.puzzlegame_template;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -104,7 +104,8 @@ public class Puzzle extends View {
         // création du puzzle
 
         if (preferences.contains("pieces_ids")) {
-            myPuzzle = new PuzzleBuilder(subdivizionNumber, BitmapFactory.decodeResource(getResources(), imageId), preferences.getString("pieces_ids", ""));
+            myPuzzle = new PuzzleBuilder(subdivizionNumber, BitmapFactory.decodeResource(getResources(), imageId));
+            myPuzzle.setPiecesIds(preferences.getString("pieces_ids", ""));
         }
         else {
             myPuzzle = new PuzzleBuilder(subdivizionNumber, BitmapFactory.decodeResource(getResources(), imageId));
@@ -141,6 +142,7 @@ public class Puzzle extends View {
                 return true;
 
             case MotionEvent.ACTION_UP:
+                Log.v("TEST - action up:", pieces.toString());
                 if (dragInfo.containsKey("piece")) {
                     // swap
                     Piece toSwap = getClosestPiece(x, y);
@@ -198,6 +200,7 @@ public class Puzzle extends View {
     }
 
     public static void shuffle() {
+        myPuzzle.shuffle();
         pieces = myPuzzle.getPieces();
     }
 
