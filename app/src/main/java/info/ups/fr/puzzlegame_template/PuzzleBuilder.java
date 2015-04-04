@@ -1,7 +1,7 @@
 package info.ups.fr.puzzlegame_template;
 
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -12,31 +12,125 @@ import java.util.Random;
 public class PuzzleBuilder {
 
     /* Attributs */
-    private int level;
-    private Bitmap fullPicture;
-    private ArrayList<Integer> piecesIds;
+    private int subdivisonLevel;
+    private Bitmap rawPicture;
+    private ArrayList<Integer> piecesIds = new ArrayList<Integer>();
+    private ArrayList<Piece> pieces = new ArrayList<Piece>();
 
     /* Constructor */
-    public PuzzleBuilder(int lvl, Bitmap picture) {
-        this.level = lvl;
-        this.createPicture(picture);
-        this.piecesIds = null;
+    public PuzzleBuilder(int subdivisionlvl, Bitmap picture) {
+        this.subdivisonLevel = subdivisionlvl;
+        this.rawPicture = picture;
+        this.shuffle();
+        this.dividePicture();
     }
 
-    public PuzzleBuilder(int lvl, Bitmap picture, String piecesIndex) {
-        this.level = lvl;
-        this.createPicture(picture);
-        this.piecesIds = this.parsePiecesIds(piecesIndex);
+    /**
+     * Met à jour le niveau
+     * @param subdivisionLevel
+     */
+    public void setSubdivisionLevel(int subdivisionLevel) {
+        this.subdivisonLevel = subdivisionLevel;
+        this.dividePicture();
     }
 
-    private void createPicture(Bitmap rawPicture) {
+    /**
+     * Met à jour l'image du puzzle
+     * @param picture la nouvelle image
+     */
+    public void setPicture(Bitmap picture) {
+        this.rawPicture = picture;
+        this.dividePicture();
+    }
+
+    /**
+     * Mélange les pièces, l'utilisateur devras récupérer le nouveau tableau de pièces mélangées
+     */
+    public void shuffle() {
+        this.piecesIds.clear();
+        final int listSize = this.subdivisonLevel * this.subdivisonLevel;
+
+        for (int i=0 ; i<listSize ; ++i)
+            this.piecesIds.add(i);
+
+
+        Random r = new Random();
+
+        int alea1;
+        int alea2;
+        int tmp;
+        for (int i=0 ; i<listSize ; ++i) {
+            alea1 = r.nextInt(listSize);
+            alea2 = r.nextInt(listSize);
+
+            tmp = this.piecesIds.get(alea1);
+            this.piecesIds.set(alea1, this.piecesIds.get(alea2));
+            this.piecesIds.set(alea2, tmp);
+        }
+
+        Log.v("TEST", piecesIds.toString());
+    }
+
+    /**
+     * @return la taille d'une sous image du puzzle
+     */
+    public int getSubSize() {
+        return this.pieces.get(0).getImage().getWidth();
+    }
+
+    /**
+     * Renvoie la liste des pièces
+     * @return pieces
+     */
+    public ArrayList<Piece> getPieces() {
+        Grid grid = new Grid(subdivisonLevel*subdivisonLevel, this.getSubSize(), this.getSubSize());
+        for (int i=0 ; i<this.pieces.size() ; ++i) {
+            this.pieces.get(i).setIdG(this.piecesIds.get(i));
+            this.pieces.get(i).setCoord(grid.getPoint(this.piecesIds.get(i)));
+        }
+
+        return this.pieces;
+    }
+
+    /**
+     * Permet de définir l'ordre des pièces
+     * @param values une chaine de caractères au format [[id,idG], ...]
+     * @return false en cas de soucis avec la chaine de définition, true sinon
+     */
+    public boolean setPiecesIds(String values) {
+        String[] tab = values.split("\\], \\[");
+        tab[0] = tab[0].substring(2);
+        tab[tab.length-1] = tab[tab.length-1].substring(0,tab[tab.length-1].length()-2);
+
+        if(this.piecesIds.size() != tab.length){
+            return false;
+        }
+
+        String[] couple;
+        this.piecesIds.clear();
+        for (String str : tab) {
+            couple = str.split(",");
+            piecesIds.add(Integer.parseInt(couple[0]), Integer.parseInt(couple[1]));
+        }
+
+        return true;
+    }
+
+    /**
+     * Revoie une image formatée et découpable pour le puzzle
+     * @param rawPicture image de base
+     * @return formated picture
+     */
+    private Bitmap createPicture(Bitmap rawPicture) {
+        Bitmap result;
+
         /* rend l'image carrée */
         int size = (rawPicture.getHeight() < rawPicture.getWidth())?
                 rawPicture.getHeight() :
                 rawPicture.getWidth();
         int xPadding = (rawPicture.getWidth()-size)/2;
         int yPadding = (rawPicture.getHeight()-size)/2;
-        this.fullPicture = Bitmap.createBitmap(rawPicture, xPadding, yPadding, size, size);
+        result = Bitmap.createBitmap(rawPicture, xPadding, yPadding, size, size);
 
         /* redimensionnement de l'image */
         int maxSize = (Puzzle.height> Puzzle.width)?
@@ -46,110 +140,34 @@ public class PuzzleBuilder {
         if (maxSize>size)
             maxSize = size;
 
-        while (maxSize%this.level != 0) // on rend l'image divisible en part égales
+        while (maxSize%this.subdivisonLevel != 0) // on rend l'image divisible en part égales
             --maxSize;
 
-        this.fullPicture = Bitmap.createScaledBitmap(this.fullPicture, maxSize, maxSize, true);
-    }
-
-
-
-    /**
-     * @return la taille d'une sous image du puzzle
-     */
-    public int getSubSize() {
-        return this.fullPicture.getWidth() / this.level;
+        return Bitmap.createScaledBitmap(result, maxSize, maxSize, true);
     }
 
     /**
      * Divise l'image de base en carrés et construit une liste ordonée avec les morceaux créés
      */
-    private ArrayList<Bitmap> dividePicture() {
-        ArrayList<Bitmap> pictures = new ArrayList<Bitmap>();
-        int size = this.fullPicture.getWidth();
-        int subSize = size / this.level;
-        int endSubSize = size - subSize*(this.level-1);
+    private void dividePicture() {
+        Bitmap picture = this.createPicture(this.rawPicture);
+
+        int size = picture.getWidth();
+        int subSize = size / this.subdivisonLevel;
+        int endSubSize = size - subSize*(this.subdivisonLevel -1);
 
         int xSize;
         int ySize;
 
-        for(int j,i=0 ; i<this.level ; ++i) {
-            for(j=0 ; j<this.level ; ++j) {
-                xSize = (i<this.level-1)? subSize : endSubSize;
-                ySize = (j<this.level-1)? subSize : endSubSize;
+        for(int j,i=0 ; i<this.subdivisonLevel; ++i) {
+            for(j=0 ; j<this.subdivisonLevel; ++j) {
+                xSize = (i<this.subdivisonLevel -1)? subSize : endSubSize;
+                ySize = (j<this.subdivisonLevel -1)? subSize : endSubSize;
 
-                pictures.add(
-                        Bitmap.createBitmap(this.fullPicture, i*subSize, j*subSize, xSize, ySize)
-                );
+                this.pieces.add(new Piece(i*subdivisonLevel+j, 0,
+                        Bitmap.createBitmap(picture, i*subSize, j*subSize, xSize, ySize)
+                ));
             }
         }
-
-        return pictures;
-    }
-
-    /**
-     *
-     * @return Une liste d'Integer mélangés
-     */
-    private ArrayList<Integer> shuffle() {
-        Random r = new Random();
-        int listSize = this.level*this.level;
-        ArrayList<Integer> randomList = new ArrayList<Integer>(listSize);
-
-        for (int i=0 ; i<listSize ; ++i){
-            randomList.add(i);
-        }
-
-        int alea1;
-        int alea2;
-        int tmp;
-        for (int i=listSize*2 ; i>=0 ; --i) {
-            alea1 = r.nextInt(listSize-1);
-            alea2 = r.nextInt(listSize-1);
-            tmp = randomList.get(alea1);
-            randomList.set(alea1, randomList.get(alea2));
-            randomList.set(alea2, tmp);
-        }
-
-        return randomList;
-    }
-
-    /* NE PAS CHERCHER A COMPRENDRE, ATTENTION DANGEUREUX POUR VOTRE CERVEAU!!!!! */
-    private ArrayList<Integer> parsePiecesIds(String values) {
-        String[] tab = values.split("\\], \\[");
-        tab[0] = tab[0].substring(2);
-        tab[tab.length-1] = tab[tab.length-1].substring(0,tab[tab.length-1].length()-2);
-
-        String[] couple;
-        ArrayList<Integer> result = new ArrayList<Integer>();
-        for (String str : tab) {
-            couple = str.split(",");
-            result.add(Integer.parseInt(couple[0]), Integer.parseInt(couple[1]));
-        }
-
-        return result;
-    }
-
-    /**
-     *
-     * @return Une liste de pièces dont les positions sont mélangées
-     */
-    public ArrayList<Piece> getPieces() {
-        ArrayList<Piece> pieces = new ArrayList<Piece>();
-
-        ArrayList<Bitmap> pictures = this.dividePicture();
-        ArrayList<Integer> indexes = (this.piecesIds==null)? this.shuffle() : this.piecesIds;
-
-        Grid grid = new Grid(pictures.size(), this.getSubSize(), this.getSubSize());
-
-        for (int i=0 ; i<pictures.size() ; ++i) {
-            pieces.add(new Piece(i, indexes.get(i), pictures.get(i)));
-        }
-
-        for (Piece p : pieces) {
-            p.setCoord(grid.getPoint(p.getIdG()));
-        }
-
-        return pieces;
     }
 }
