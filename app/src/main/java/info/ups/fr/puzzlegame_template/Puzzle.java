@@ -2,6 +2,7 @@ package info.ups.fr.puzzlegame_template;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -52,13 +53,9 @@ public class Puzzle extends View {
         }
 
         if (takeASleep) {
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            takeASleep = false;
-            newPuzzle();
+            updatePreferences();
+            Intent intent = new Intent(gameActivity, GameWinActivity.class);
+            gameActivity.startActivity(intent);
         }
     }
 
@@ -170,6 +167,7 @@ public class Puzzle extends View {
                     if (this.isGameFinished()) {
                         takeASleep = true;
                         invalidate();
+
                     }
                 }
                     invalidate();
@@ -179,7 +177,7 @@ public class Puzzle extends View {
         return super.onTouchEvent(event);
     }
 
-    private void newPuzzle() {
+    private void updatePreferences() {
         SharedPreferences preferences = getContext().getSharedPreferences("preferences", 0);
         SharedPreferences.Editor editor = preferences.edit();
 
@@ -194,7 +192,6 @@ public class Puzzle extends View {
             editor.apply();
         }
         editor.commit();
-        this.initPuzzle();
     }
 
     public static void shuffle() {

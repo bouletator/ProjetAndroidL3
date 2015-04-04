@@ -10,5 +10,7 @@
     <string name="reset_button">Reset</string>
     <string name="exit_button">Exit</string>
     <string name="choose_level_title">Choose your level</string>
+    <string name="title_activity_game_win">Success Level</string>
+    <string name="level_win_text">You win</string>
 
 </resources>
